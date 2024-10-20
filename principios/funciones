@@ -1,0 +1,6 @@
+# Ejemplo de función
+def saludar(nombre):
+    print("Hola, " + nombre + "!")
+
+# Llamada a la función
+saludar("Alice")

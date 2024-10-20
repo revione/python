@@ -1,0 +1,43 @@
+# Python ruta:
+
+which python
+which pip
+which python3
+which pip3
+which python3.12
+which pip3.12
+
+# Venv
+
+create-venv
+active-venv
+deactivate
+
+
+python -m venv was
+source was/bin/activate
+
+
+pip install -r requirements.txt
+
+pip list
+
+# pasos para crear un venv
+
+- Navega al directorio de tu proyecto
+  cd /ruta/de/tu/proyecto
+
+- Crear el entorno virtual
+  python -m venv nombre_de_la_carpeta_que_contendra_el_entorno
+
+- Activar el entorno virtual (en el directorio de tu proyecto)
+  source venv/bin/activate
+
+deberías ver el nombre del entorno (por ejemplo, venv) aparecer en el prompt de la terminal.
+
+- Desactivar el entorno virtual
+  deactivate
+
+- Instalacion de paquetes
+  pip install nombre_del_paquete
+  pip install -r requirements.txt

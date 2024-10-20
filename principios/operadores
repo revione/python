@@ -1,0 +1,4 @@
+# Ejemplo de operadores
+suma = x + y
+comparacion = x > y
+logica = es_verdadero and (x < 10)

@@ -1,0 +1,8 @@
+# Ejemplo de lista
+numeros = [1, 2, 3, 4, 5]
+
+# Ejemplo de tupla
+coordenadas = (10, 20)
+
+# Ejemplo de diccionario
+persona = {"nombre": "Juan", "edad": 25}

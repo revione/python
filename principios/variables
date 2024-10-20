@@ -1,0 +1,5 @@
+# Ejemplo de variables
+x = 5
+y = 3.14
+nombre = "Python"
+es_verdadero = True

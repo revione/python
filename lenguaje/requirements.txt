@@ -1,0 +1,9 @@
+#requirements.txt 
+
+spacy
+
+# Dependencias específicas para resolver el problema de OpenSSL
+urllib3==1.26.6
+
+websockets
+wiktionary_de_parser

@@ -1,0 +1,6 @@
+#requirements.txt 
+
+spacy
+websockets
+wiktionary_de_parser
+load_dotenv

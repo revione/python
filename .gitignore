@@ -1,0 +1,56 @@
+# Entorno virtual
+venv/
+env/
+ENV/
+.venv/
+.pipenv/
+
+# Archivos de configuración y caché de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos generados por herramientas de entorno o IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Archivos de logs y dumps
+*.log
+*.pot
+*.py[cod]
+
+# Dependencias (si se utiliza poetry, pipenv o archivos de lock)
+*.lock
+poetry.lock
+Pipfile.lock
+
+# Distribución
+build/
+dist/
+*.egg-info/
+
+# Archivos de bases de datos y migraciones
+*.db
+*.sqlite3
+
+# Archivos temporales
+*.tmp
+*.bak
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Docker y Kubernetes
+docker-compose.yml
+docker-compose.override.yml
+.kube/
+
+# Archivos de pruebas
+.coverage
+.cache/
+pytest_cache/
+
+.DS_Store

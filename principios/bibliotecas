@@ -1,0 +1,5 @@
+# Ejemplo de importación de módulo
+import math
+
+# Uso de función de la biblioteca math
+raiz_cuadrada = math.sqrt(25)
