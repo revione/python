@@ -69,7 +69,7 @@ docker network inspect bridge
 
 Publicar la imagen
 docker login
-docker build -t rev-deutsch:1.0.0 .
+docker build -t rev-deutsch:1.0.1 .
 docker tag rev-deutsch:1.0.0 revione/rev-deutsch:1.0.0
 docker push revione/rev-deutsch:1.0.0
 
@@ -96,3 +96,7 @@ docker buildx build --platform linux/amd64 -t rev-deutsch:1.0.0 --push .
 docker build --platform linux/amd64 -t rev-deutsch:1.0.0 .
 docker tag rev-deutsch:1.0.0 revione/rev-deutsch:1.0.0
 docker push revione/rev-deutsch:1.0.0
+
+docker build --platform linux/amd64 -t rev-deutsch:1.0.1 .
+docker tag rev-deutsch:1.0.1 revione/rev-deutsch:1.0.1
+docker push revione/rev-deutsch:1.0.1

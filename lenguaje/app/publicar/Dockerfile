@@ -13,9 +13,12 @@ COPY 7-client.py .
 # Instala las dependencias
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Descarga e instala el modelo de Spacy 'de_core_news_md'
+RUN python -m spacy download de_core_news_md
+
 # Instala el modelo
 # RUN python -m spacy download de_dep_news_trf
-RUN python -m spacy download de_core_news_sm
+# RUN python -m spacy download de_core_news_sm
 
 # Exponer el puerto 8765
 EXPOSE 8765

@@ -29,6 +29,7 @@ pip list
 
 - Crear el entorno virtual
   python -m venv nombre_de_la_carpeta_que_contendra_el_entorno
+  python -m venv venv
 
 - Activar el entorno virtual (en el directorio de tu proyecto)
   source venv/bin/activate

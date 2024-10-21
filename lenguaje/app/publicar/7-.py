@@ -1,6 +1,5 @@
 import asyncio
 import websockets
-import socket
 import spacy
 import json
 import os
@@ -14,8 +13,7 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# nlp = spacy.load("de_dep_news_trf")
-nlp = spacy.load("de_core_news_sm")
+nlp = spacy.load("de_core_news_md")
 
 async def procesar_y_responder(websocket, mensaje):
     try:
@@ -44,12 +42,8 @@ async def procesar_y_responder(websocket, mensaje):
 
 async def websocket_handler(websocket, path):
     try:
-        logger.info(f"Manejo de conexión iniciado en el path: {path}")
-        print(f"Manejo de conexión iniciado en el path: {path}")
-
         while True:
             mensaje_str = await websocket.recv()
-            print(f"Mensaje recibido: {mensaje_str}")
 
             try:
                 mensaje = json.loads(mensaje_str)
@@ -73,13 +67,35 @@ async def websocket_handler(websocket, path):
         logger.info("La conexión se cerró, realizando limpieza si es necesario.")
 
 # Configuración de la dirección y el puerto desde variables de entorno
-# host = os.getenv("WEBSOCKET_HOST", "0.0.0.0")
 host = os.getenv("WEBSOCKET_HOST", "127.0.0.1")
 port = int(os.getenv("WEBSOCKET_PORT", 8765))
 
-logger.info(f'Servidor en {host}:{port}')
-start_server = websockets.serve(websocket_handler, host, port, family=socket.AF_INET)
-logger.info(f'Servidor corriendo en {host}:{port}')
+# Función para arrancar el servidor
+async def start_websocket_server():
+    start_server = await websockets.serve(websocket_handler, host, port)
+    return start_server
 
-asyncio.get_event_loop().run_until_complete(start_server)
-asyncio.get_event_loop().run_forever()
+# Aplicación principal que ejecuta el servidor WebSocket
+async def main():
+    server = await start_websocket_server()
+
+    try:
+        await asyncio.Future()  # Mantener el servidor corriendo indefinidamente
+    except asyncio.CancelledError:
+        logger.info("Servidor WebSocket detenido.")
+    except KeyboardInterrupt:
+        logger.info("Servidor detenido manualmente por el usuario.")
+    except Exception as e:
+        logger.error(f"Error inesperado: {e}")
+    finally:
+        logger.info("Cerrando el servidor WebSocket...")
+        server.close()
+        await server.wait_closed()
+        logger.info("Servidor WebSocket cerrado.")
+
+# Ejecuta el bucle de eventos usando asyncio.run()
+if __name__ == "__main__":
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        logger.info("Interrupción manual del programa (Ctrl+C).")

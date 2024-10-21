@@ -70,8 +70,32 @@ async def websocket_handler(websocket, path):
 host = os.getenv("WEBSOCKET_HOST", "localhost")
 port = int(os.getenv("WEBSOCKET_PORT", 8765))
 
-start_server = websockets.serve(websocket_handler, host, port)
-# logger.info(f'\nServidor corriendo en {host}:{port}\n')
+# Función para arrancar el servidor
+async def start_websocket_server():
+    start_server = await websockets.serve(websocket_handler, host, port)
+    return start_server
 
-asyncio.get_event_loop().run_until_complete(start_server)
-asyncio.get_event_loop().run_forever()
+# Aplicación principal que ejecuta el servidor WebSocket
+async def main():
+    server = await start_websocket_server()
+
+    try:
+        await asyncio.Future()  # Mantener el servidor corriendo indefinidamente
+    except asyncio.CancelledError:
+        logger.info("Servidor WebSocket detenido.")
+    except KeyboardInterrupt:
+        logger.info("Servidor detenido manualmente por el usuario.")
+    except Exception as e:
+        logger.error(f"Error inesperado: {e}")
+    finally:
+        logger.info("Cerrando el servidor WebSocket...")
+        server.close()
+        await server.wait_closed()
+        logger.info("Servidor WebSocket cerrado.")
+
+# Ejecuta el bucle de eventos usando asyncio.run()
+if __name__ == "__main__":
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        logger.info("Interrupción manual del programa (Ctrl+C).")
