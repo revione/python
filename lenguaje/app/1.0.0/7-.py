@@ -44,6 +44,9 @@ async def procesar_y_responder(websocket, mensaje):
 
 async def websocket_handler(websocket, path):
     try:
+        logger.info(f"Manejo de conexión iniciado en el path: {path}")
+        print(f"Manejo de conexión iniciado en el path: {path}")
+
         while True:
             mensaje_str = await websocket.recv()
             print(f"Mensaje recibido: {mensaje_str}")
@@ -70,15 +73,13 @@ async def websocket_handler(websocket, path):
         logger.info("La conexión se cerró, realizando limpieza si es necesario.")
 
 # Configuración de la dirección y el puerto desde variables de entorno
-# host = os.getenv("WEBSOCKET_HOST", "localhost")0.0.0.0
-host = os.getenv("WEBSOCKET_HOST", "0.0.0.0")
+# host = os.getenv("WEBSOCKET_HOST", "0.0.0.0")
+host = os.getenv("WEBSOCKET_HOST", "127.0.0.1")
 port = int(os.getenv("WEBSOCKET_PORT", 8765))
 
-logger.info(f'\nServidor en {host}:{port}\n')
-
-
+logger.info(f'Servidor en {host}:{port}')
 start_server = websockets.serve(websocket_handler, host, port, family=socket.AF_INET)
-logger.info(f'\nServidor corriendo en {host}:{port}\n')
+logger.info(f'Servidor corriendo en {host}:{port}')
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
